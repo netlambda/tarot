@@ -1,0 +1,22 @@
+{
+	"Print to console": {
+		"scope": "javascript,typescript",
+		"prefix": "rf",
+		"body": [
+      "/** @jsx jsx */",
+      "import React from 'react'",
+      "import { Flex, jsx } from \"theme-ui\";",
+      "",
+      "function ${1:${TM_FILENAME_BASE}}() {",
+      "\treturn (",
+      "\t\t<Flex>",
+      "\t\t\t$0",
+      "\t\t</Flex>",
+      "\t)",
+      "}",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}}"
+    ],
+    "description": "Creates a React Functional Component with ES7 module system"
+	}
+}
