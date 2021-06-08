@@ -143,7 +143,7 @@ function index() {
   });
   const [readMode, setReadMode] = React.useState(false);
 
-  const handleCardClick = deskSlot => {
+  const handleCardClick = (deskSlot) => {
     setState({ ...state, selectedDeskSlot: deskSlot });
     if (!state.selectedDeskSlot.card) {
       setReadMode(false);
@@ -151,12 +151,12 @@ function index() {
       setReadMode(true);
     }
   };
-  const handleSelecSuit = suit => {
+  const handleSelecSuit = (suit) => {
     setState({ ...state, selectedSuit: suit });
   };
-  const handleSetDeskSlot = card => {
+  const handleSetDeskSlot = (card) => {
     const selectedSlotIndex = state.desk.findIndex(
-      i => i.id === state.selectedDeskSlot.id,
+      (i) => i.id === state.selectedDeskSlot.id
     );
     const result = [...state.desk];
     result[selectedSlotIndex] = { ...state.desk[selectedSlotIndex], card };
@@ -168,7 +168,8 @@ function index() {
     });
     setReadMode(true);
   };
-  const handleChangeSpread = spread => {
+  const handleChangeSpread = (spread) => {
+    console.log("🚀 ~ file: index.js ~ line 172 ~ index ~ spread", spread);
     setState({ ...state, ...spread, selectedDeskSlot: spread?.desk[0] });
   };
 
@@ -182,10 +183,16 @@ function index() {
     }
   }, [state.selectedDeskSlot.id]);
 
-  const rowArr = state.desk.map(i => i.row);
+  const rowArr = state.desk.map((i) => i.row);
   const row = Math.max(...rowArr) * 3;
-  const columnArr = state.desk.map(i => i.column);
+  const columnArr = state.desk.map((i) => i.column);
   const column = Math.max(...columnArr) * 2;
+
+  const handleSelectSpread = (e) => {
+    const name = e.target.value;
+    const selectedSpread = spreads.find((i) => i.name === name);
+    handleChangeSpread(selectedSpread);
+  };
 
   return (
     <Flex
@@ -199,11 +206,13 @@ function index() {
             <Text sx={{ fontSize: 0 }}>Spread: </Text>
           </Flex>
 
-          <Select sx={{ fontSize: 0 }}>
-            {spreads.map(i => (
+          <Select sx={{ fontSize: 0 }} onChange={handleSelectSpread}>
+            {spreads.map((i) => (
               <option
                 onClick={() => handleChangeSpread(i)}
                 sx={{ mr: 3, cursor: "pointer" }}
+                key={i.name}
+                value={i.name}
               >
                 {/* <Button variant="secondary">{i.name}</Button> */}
                 {i.name}
@@ -245,12 +254,12 @@ function index() {
               }}
               id="desk-grid"
             >
-              {state.desk.map(i => (
+              {state.desk.map((i) => (
                 <Card
                   key={i.id}
                   {...i}
                   onClick={() => handleCardClick(i)}
-                  onSetReadMode={val => {
+                  onSetReadMode={(val) => {
                     setReadMode(val);
                     setState({ ...state, selectedDeskSlot: i });
                   }}
@@ -294,7 +303,7 @@ function index() {
                 </Text>
 
                 <Flex sx={{ py: 3 }}>
-                  {suits.map(i => (
+                  {suits.map((i) => (
                     <Flex
                       onClick={() => handleSelecSuit(i)}
                       sx={{
@@ -326,7 +335,7 @@ function index() {
               </Flex>
 
               <Flex sx={{ flexWrap: "wrap" }}>
-                {state.suggest.map(i => (
+                {state.suggest.map((i) => (
                   <Flex sx={{ flexDirection: "column" }}>
                     {/* <Text>{i.name}</Text> */}
                     <img
