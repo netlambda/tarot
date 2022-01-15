@@ -17,7 +17,7 @@
     "@theme-ui/typography": "^0.2.40",
     "knuth-shuffle": "^1.0.8",
     "lodash.merge": "^4.6.2",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "next": "10.2.3",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
